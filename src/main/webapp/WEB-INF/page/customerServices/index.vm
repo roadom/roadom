@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+myCode: 71b23459ed098811b6f4840d65e7c5ce
+<div style="border: 1px solid black; min-height: 100px;" id="chatBoard">
+
+</div>
+<br/>
+<input id="myInput" type="text" />
+<button id="submit">提交</button>
+
+<iframe id="postIframe" name="postIframe" src="http://www.haixue.com"></iframe>
+
+<script src="./jquery-1.11.1.min.js"></script>
+<script src="./index.js"></script>
+</body>
+</html>

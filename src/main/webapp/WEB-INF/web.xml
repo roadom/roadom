@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	
+	<!-- 这样可以使配置文件放置在src/main/resources/下也能被检测到 -->
+	<context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>classpath*:applicationContext.xml;</param-value>
+	</context-param>
+
+	<!-- listener -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	
+	<!-- restful 支持 -->
+	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+		<init-param>
+			<param-name>confReloadCheckInterval</param-name>
+			<param-value>60</param-value>
+		</init-param>
+		<init-param>
+			<param-name>logLevel</param-name>
+			<param-value>DEBUG</param-value>
+		</init-param>
+		<init-param>  
+            <param-name>confPath</param-name>  
+            <param-value>/WEB-INF/urlrewrite.xml</param-value>  
+        </init-param>
+        <init-param>  
+            <param-name>statusEnabledOnHosts</param-name>  
+            <param-value>localhost, *.roadom.com</param-value>  
+        </init-param>
+	</filter>
+	<filter-mapping>  
+        <filter-name>UrlRewriteFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+        <dispatcher>REQUEST</dispatcher>  
+        <dispatcher>FORWARD</dispatcher>  
+    </filter-mapping>
+	<!-- 解决HTTP PUT请求Spring无法获取请求参数的问题 --> 
+    <filter>  
+        <filter-name>HiddenHttpMethodFilter</filter-name>  
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>  
+    </filter>
+    <filter-mapping>  
+        <filter-name>HiddenHttpMethodFilter</filter-name>  
+        <servlet-name>mySpringDispatcher</servlet-name>  
+    </filter-mapping>
+	<!-- 编码过滤器 -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+
+
+	<!-- 静态请求放行 -->
+	<servlet-mapping>  
+	    <servlet-name>default</servlet-name>
+	    <url-pattern>/css/*</url-pattern>
+	    <url-pattern>/fonts/*</url-pattern>
+	    <url-pattern>/img/*</url-pattern>
+	    <url-pattern>/js/*</url-pattern>
+	    <url-pattern>/less/*</url-pattern>
+	</servlet-mapping>
+	<!-- spring -->
+	<servlet>
+		<servlet-name>mySpringDispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath*:applicationContext.xml;</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mySpringDispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- velocity -->
+	<servlet>
+		<servlet-name>velocityView</servlet-name>
+		<servlet-class>org.apache.velocity.tools.view.VelocityViewServlet</servlet-class>
+		<init-param>
+			<param-name>org.apache.velocity.tools</param-name>
+			<param-value>tools.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.apache.velocity.properties</param-name>
+			<param-value>velocity.properties</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>velocityView</servlet-name>
+		<url-pattern>*.vm</url-pattern>
+	</servlet-mapping>
+
+	
+	<!-- 欢迎页 -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<!-- 
+	<error-page>
+		<error-code>404</error-code>
+		<location>404.html</location>
+	</error-page>
+	 -->
+
+	
+</web-app>  
+

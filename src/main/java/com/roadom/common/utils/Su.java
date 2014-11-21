@@ -8,11 +8,11 @@ import org.codehaus.jackson.JsonEncoding;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class StringUtils {
+public class Su {
 	
 	private static JsonGenerator jsonGenerator;
 	private static ObjectMapper objectMapper = new ObjectMapper();
-	public StringUtils(){
+	public Su(){
 		
 		try {
 			jsonGenerator = objectMapper.getJsonFactory().createJsonGenerator(System.out, JsonEncoding.UTF8);

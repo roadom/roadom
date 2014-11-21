@@ -1,7 +1,7 @@
 package com.roadom.customer.model;
 
 import com.roadom.base.module.BaseModel;
-import com.roadom.customer.CustomerSource;
+import com.roadom.customer.enums.CustomerSource;
 
 /**
  * 用户基类

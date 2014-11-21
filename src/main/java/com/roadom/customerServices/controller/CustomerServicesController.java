@@ -63,6 +63,7 @@ public class CustomerServicesController extends BaseController {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		String result = customerServicesBiz.getRobotAnswer(question);
+		modelAndView.addObject(result);
 		
 		return modelAndView;
 	}

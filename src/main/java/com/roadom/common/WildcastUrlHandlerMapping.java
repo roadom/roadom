@@ -11,7 +11,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 
-import com.roadom.common.utils.StringUtils;
+import com.roadom.common.utils.Su;
 
 
 /**
@@ -57,7 +57,7 @@ public class WildcastUrlHandlerMapping extends SimpleUrlHandlerMapping
 			if(at instanceof WebModuleMapping){
 				String value = ((WebModuleMapping) at).value();
 				//采用包名路径
-				if(StringUtils.isTrimEmpty(value)){
+				if(Su.isTrimEmpty(value)){
 					String modules[] = clazz.getName().split("\\.");
 					if(modules!=null&&modules.length>3){
 						uriPart.append(modules[2]).append("/");
@@ -97,7 +97,7 @@ public class WildcastUrlHandlerMapping extends SimpleUrlHandlerMapping
 						.getBeanDefinition(beanName);
 				
 				String className = definition1.getBeanClassName();
-				if (!StringUtils.isTrimEmpty(className) && className.endsWith(CONTROLLER_BEAN_NAME_SUFFIX)) {
+				if (!Su.isTrimEmpty(className) && className.endsWith(CONTROLLER_BEAN_NAME_SUFFIX)) {
 					addWildCardHandler(className,beanName);
 				}
 			}

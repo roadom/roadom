@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.junit.Test;
 
 import com.roadom.base.dao.BaseDao;
@@ -12,8 +14,10 @@ import com.roadom.base.dao.DBAccess;
 import com.roadom.customer.model.Customer;
 
 public class CustomerDao implements BaseDao{
-
+	private static final Logger log = LogManager.getLogger(CustomerDao.class);
+	
 	List<Customer> findAll(){
+		log.trace(123123);
 		List<Customer> result = new ArrayList<Customer>();
 		SqlSession sqlSession = null;
 		try {
@@ -37,7 +41,7 @@ public class CustomerDao implements BaseDao{
 		CustomerDao dao = new CustomerDao();
 		List<Customer> a = dao.findAll();
 		
-		System.out.println();
+		System.out.println(a);
 		
 	}
 	

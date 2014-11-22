@@ -1,7 +1,5 @@
 package com.roadom.base.dao;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.io.Reader;
 
@@ -21,7 +19,7 @@ public class DBAccess {
 	 */
 	public static SqlSession getSqlSession() throws IOException{
 		SqlSession result = null;
-		Reader reader = Resources.getResourceAsReader("Configuration.xml");
+		Reader reader = Resources.getResourceAsReader("myBatis.xml");
 		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader);
 		result = factory.openSession();
 		return result;
